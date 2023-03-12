@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wybierz kandydata</title>
+  </head>
+  <body>
+    <h1>Wybierz kandydata</h1>
+    <form method="POST" action="/submit">
+      <label for="candidate">Imię kandydata:</label>
+      <select name="candidate" id="candidate">
+        <option value="1">Adam Paska</option>
+        <option value="2">Jakub Osica</option>
+        <option value="3">Dawid Muras</option>
+      </select>
+      <br><br>
+      <label for="name">Twoje imię:</label>
+      <input type="text" name="name" id="name" required>
+      <br><br>
+      <label for="surname">Twoje nazwisko:</label>
+      <input type="text" name="surname" id="surname" required>
+      <br><br>
+      <input type="submit" value="Wyślij">
+    </form>
+  </body>
+</html>
