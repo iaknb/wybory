@@ -72,7 +72,7 @@ connection.query('SELECT * FROM glosy', function (error, results, fields) {
       data.push({ id: row.id_kandydata, imie: row.imie_g, nazwisko: row.nazwisko_g });
   }
 
-  // Zdefiniowanie ścieżki do pliku HTML
+  // Plik HTML
   app.get('/wyniki', function (req, res) {
       let adam = 0
       let jakub = 0
@@ -109,25 +109,17 @@ connection.query('SELECT * FROM glosy', function (error, results, fields) {
       res.send(html);
   });
   app.get('/admin', function (request, response) {
-      // Render login template
       response.sendFile(path.join(__dirname + '/login.html'));
   });
   app.post('/auth', function (request, response) {
-      // Capture the input fields
       let username = request.body.username;
       let password = request.body.password;
-      // Ensure the input fields exists and are not empty
       if (username && password) {
-          // Execute SQL query that'll select the account from the database based on the specified username and password
           con.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
-              // If there is an issue with the query, output the error
               if (error) throw error;
-              // If the account exists
               if (results.length > 0) {
-                  // Authenticate the user
                   request.session.loggedin = true;
                   request.session.username = username;
-                  // Redirect to home page
                   response.redirect('/home');
               } else {
                   response.send('Incorrect Username and/or Password!');
@@ -140,7 +132,6 @@ connection.query('SELECT * FROM glosy', function (error, results, fields) {
       }
   });
   app.get('/home', function (request, response) {
-      // If the user is loggedin
       if (request.session.loggedin) {
           let html = '<html><head><title>Dane użytkowników</title></head><body><h1>Dane użytkowników</h1><table>';
           html += '<thead><tr><th>Kandydat</th><th>Imię głosującego</th><th>Nazwisko głosującego</th></tr></thead>';
@@ -158,7 +149,6 @@ connection.query('SELECT * FROM glosy', function (error, results, fields) {
           html += '</tbody></table></body></html>';
           response.send(html);
       } else {
-          // Not logged in
           response.send('Please login to view this page!')
       }
       response.end();
