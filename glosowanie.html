@@ -1,25 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Wybierz kandydata</title>
-  </head>
-  <body>
-    <h1>Wybierz kandydata</h1>
-    <form method="POST" action="/submit">
-      <label for="candidate">Imię kandydata:</label>
-      <select name="candidate" id="candidate">
-        <option value="1">Adam Paska</option>
-        <option value="2">Jakub Osica</option>
-        <option value="3">Dawid Muras</option>
-      </select>
-      <br><br>
-      <label for="name">Twoje imię:</label>
-      <input type="text" name="name" id="name" required>
-      <br><br>
-      <label for="surname">Twoje nazwisko:</label>
-      <input type="text" name="surname" id="surname" required>
-      <br><br>
-      <input type="submit" value="Wyślij">
-    </form>
-  </body>
+
+<head>
+  <title>Wybierz kandydata</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: dodgerblue linear-gradient(22deg, aqua, dodgerblue, deeppink) fixed;
+      color: white;
+      font: normal 32px/1.6 system-ui, sans-serif;
+      text-shadow: 0 1px 1px hsl(0 0% 0% / 20%);
+      margin: 16rem;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+
+    .inputs {
+      justify-content: center;
+      display: flex;
+    }
+
+    .kandydat {
+      width: 300px;
+    }
+
+    .imie_g {
+      width: 300px;
+    }
+
+    .nazwisko_g {
+      width: 300px;
+    }
+
+
+    #candidate {
+      border: none;
+      outline: none;
+      background: transparent;
+      appearance: none;
+
+      width: 100%;
+      padding: 12px 55px 15px 15px;
+      font-size: 14px;
+      color: #714BB9;
+    }
+
+    #name {
+      padding: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      width: 250px;
+      height: 20px;
+      color: #714BB9;
+      background-color: transparent;
+      opacity: 0.8;
+      outline: none;
+      border-top-style: hidden;
+      border-right-style: hidden;
+      border-left-style: hidden;
+      border-bottom-style: groove;
+    }
+    #surname {
+      
+      padding: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      width: 250px;
+      height: 20px;
+      color: #714BB9;
+      background-color: transparent;
+      opacity: 0.8;
+      outline: none;
+      border-top-style: hidden;
+      border-right-style: hidden;
+      border-left-style: hidden;
+      border-bottom-style: groove;
+    }
+
+    .submit {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 64px;
+      width: 270px;
+      height: 80px;
+      border: none;
+      background: #2f2f2f;
+      color: #fff;
+      font-size: 22px;
+      border-radius: 40px;
+      text-align: center;
+      box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Wybierz kandydata</h1>
+  <form method="POST" action="/submit" id="form">
+    <div class="inputs">
+      <div class="kandydat">
+        <label for="candidate" class="custom-select">Imię kandydata:</label>
+        <select name="candidate" id="candidate">
+          <option value="1">Adam Paska</option>
+          <option value="2">Jakub Osica</option>
+          <option value="3">Dawid Muras</option>
+        </select>
+      </div>
+      <div class="imie_g">
+        <label for="name">Twoje imię:</label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      <div class="nazwisko_g">
+        <label for="surname">Twoje nazwisko:</label>
+        <input type="text" name="surname" id="surname" required>
+      </div>
+    </div>
+    <input type="submit" value="Wyślij" class="submit">
+  </form>
+</body>
+
 </html>
