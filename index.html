@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Aplikacja do zarządzania zadaniami</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="tasks">
+      <h1>Lista zadań</h1>
+      <div id="task-list"></div>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $.get("/projects", function (projects) {
+        projects.forEach(function (project) {
+          let projectItem = $("<li><strong>Projekt:</strong> " + project.name + " (ID: " + project.id + ")</li>");
+          let tasksList = $("<ul></ul>");
+
+          $.get("/tasks/" + project.id, function (tasks) {
+            if (tasks.length > 0) {
+              tasks.forEach(function (task) {
+                let li = $("<li class='tasks'></li>");
+                const div = $("<div></div>")
+                const todo = $("<button></button>")
+                const progress = $("<button></button>")
+                li.append(task.name + " (Użytkownik: " + task.user_name + ")" + " Status zadania: " + task.status);
+                todo.append("TODO")
+                progress.append("PROGRESS")
+                todo.click(function (status) {
+                  $.post("/tasks/status", { projectId: project.id, taskId: task.id, status: "todo" }, function (response) {
+
+                    alert("Status zadania został zmieniony na 'todo'");
+                    location.reload()
+                  });
+                })
+                progress.click(function (status) {
+                  $.post("/tasks/status", { projectId: project.id, taskId: task.id, status: "in_progress" }, function (response) {
+
+                    alert("Status zadania został zmieniony na 'in_progress'");
+                    location.reload()
+                  });
+                })
+                div.append(todo)
+                div.append(progress)
+                li.append(div)
+                tasksList.append(li);
+              });
+            } else {
+              tasksList.append("<li>Brak zadań</li>");
+            }
+
+            projectItem.append(tasksList);
+            $("#task-list").append(projectItem);
+          });
+        });
+        $.get("/users", function (users) {
+          users.forEach(function (user) {
+            let userItem = $("<li>" + user.name + " " + user.last_name + "</li>");
+            $("#user-list").append(userItem);
+          });
+        });
+
+      });
+
+    });
+  </script>
+</body>
+
+</html>
